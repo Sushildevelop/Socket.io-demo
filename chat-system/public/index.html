@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Chat</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        #chat { height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 1em; }
+        input, button { margin-top: 1em; }
+      </style>
+</head>
+<body>
+    <h2>Real-Time Chat</h2>
+    <div id="chat"></div>
+  
+    <input id="username" placeholder="Enter your name" />
+    <button onclick="joinChat()">Join</button>
+    
+    <br>
+    <input id="message" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+  
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const chatDiv = document.getElementById("chat");
+  
+      function appendMessage(msg) {
+        const p = document.createElement("p");
+        p.textContent = typeof msg === "string" ? msg : `${msg.user}: ${msg.text}`;
+        chatDiv.appendChild(p);
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+      }
+  
+      function joinChat() {
+        const username = document.getElementById("username").value;
+        if (username) socket.emit("join", username);
+      }
+  
+      function sendMessage() {
+        const msg = document.getElementById("message").value;
+        if (msg) {
+          socket.emit("chatMessage", msg);
+          document.getElementById("message").value = "";
+        }
+      }
+  
+      socket.on("message", (msg) => {
+        appendMessage(msg);
+      });
+    </script>
+    
+</body>
+</html>
