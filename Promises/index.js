@@ -156,18 +156,53 @@ const flattened = arrays.reduce((accumulator, currentValue) => {
 console.log(flattened);  // Output: [1, 2, 3, 4, 5, 6]
 
 
+const arr=[[1,2,"Wow"],[3,4,"Ohh"],[5,6,"LAIS"]]
+
+const convert=arr.reduce((acc,current)=>{
+  return acc.concat(current)
+})
+
+console.log(convert);
+
+
+const convert1=arr.reduce((acc,curr)=>{
+  return acc+curr.toString()
+})
+
+console.log(convert1);
 
 
 
+let allarr=[[1,2,4,5],[6,7,8,9],[10,10,20,30]]
+
+const mapfun=allarr.map(num=>num.map(num=>num * 2))
+console.log(mapfun);
+
+const filterFun=allarr.filter(num=>num.some(num=>num > 5))
+console.log(filterFun);
+
+const reduceFun=allarr.reduce((acc,curr)=>{
+  return acc.concat(curr)
+})
+console.log(reduceFun);
+
+const person = [
+  { name: "Alice", age: 25 },
+  { name: "Bob", age: 30 },
+  { name: "Charlie", age: 25 },
+  { name: "David", age: 30 },
+];
 
 
+const mapfun1=person.map(num=>num.name.toUpperCase())
+console.log(mapfun1);
+
+const filterFun1=person.filter(num=>num.name==='Alice' && num.age ===25)
+console.log(filterFun1);
 
 
-
-
-
-
-let fruits = ["apple", "banana", "cherry"];
-
-
+const reduceFun1 = person.reduce((acc, curr) => {
+  return acc.concat(curr.name);  // Concatenate the name of the current person
+}, []);
+console.log(reduceFun1);
 
